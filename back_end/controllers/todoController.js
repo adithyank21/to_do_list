@@ -1,3 +1,4 @@
+const todoModels = require('../models/todoModels');
 const Todo = require('../models/todoModels');
 
 // Get all todos
@@ -26,3 +27,9 @@ exports.createTodo = async (req, res) => {
     res.status(500).json({ message: 'Error creating todo' });
   }
 };
+// //fetch data
+// const getTodolist=async(req,res)=>{
+//   const todolist=await todoModels.find()
+//   todolist.length>0?res.json(todolist):res.json([])
+// }
+// module.exports = getTodolist

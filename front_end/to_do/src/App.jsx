@@ -1,25 +1,36 @@
 import React, { useState, useEffect } from 'react';
+import TodoForm from './components/form'; // assuming TodoForm is in the same directory
 import axios from 'axios';
-import TodoForm from './components/form';
+import Viewtolist from './components/viewtodollist';
 
-function App() {
+const App = () => {
   const [todos, setTodos] = useState([]);
 
-  // Fetch all todos from backend
+  // Define the fetchTodos function
   const fetchTodos = async () => {
-    const response = await axios.get('http://localhost:5000/api/todos');
-    setTodos(response.data);
+    try {
+      const response = await axios.get('http://localhost:5000/api/todos');
+      setTodos(response.data);
+    } catch (error) {
+      console.error('Error fetching todos:', error);
+    }
   };
 
   useEffect(() => {
-    fetchTodos();
+    fetchTodos(); // Fetch todos when the component mounts
   }, []);
 
   return (
-    <>
-    <TodoForm/>
-    </>
+    <div>
+      <TodoForm fetchTodos={fetchTodos} /> {/* Pass fetchTodos as a prop */}
+      {/* <ul>
+        {todos.map(todo => (
+          <li key={todo.id}>{todo.title}</li>
+        ))}
+      </ul> */}
+      <Viewtolist/>
+    </div>
   );
-}
+};
 
 export default App;
