@@ -27,6 +27,17 @@ exports.createTodo = async (req, res) => {
     res.status(500).json({ message: 'Error creating todo' });
   }
 };
+
+// delete
+exports.todolistDelete=async(req,res)=>{
+  const idno = req.params.id;
+  console.log(idno)
+  await Todo.deleteOne({_id:idno})
+  res.json("data is deleted")
+
+}
+// 
+
 // //fetch data
 // const getTodolist=async(req,res)=>{
 //   const todolist=await todoModels.find()

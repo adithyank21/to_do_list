@@ -6,7 +6,7 @@ const todoSchema = new mongoose.Schema({
   description: String,
   time: String,
   date: String,
-});
+},{timestamps:true});
 
 // Export the model
 module.exports = mongoose.model('Todo', todoSchema);

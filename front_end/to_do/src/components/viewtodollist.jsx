@@ -13,6 +13,18 @@ export default function Viewtolist(){
             console.log(err)
         })
     })
+    const deleteList=(idn)=>{
+      const ans=window.confirm("do yo want to delete")
+      const api=`http://localhost:5000/api/todos/${idn}`
+      ans?
+        axios.delete(api)
+        .then((res)=>{
+              alert(res.data)
+        }):
+        alert("cancel")
+        
+
+    }
     return(
         <>
         <Container>
@@ -25,6 +37,7 @@ export default function Viewtolist(){
                             <th>Description</th>
                             <th>Date</th>
                             <th>Time</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,7 +58,13 @@ export default function Viewtolist(){
                                         <td>
                                             {list.time}
                                         </td>
+                                        <td>
 
+                                        <button onClick={() => deleteList(list._id)}>
+    Delete
+</button>
+
+                                        </td>
                                     </tr>
                                 )
                             }):"No data found"
